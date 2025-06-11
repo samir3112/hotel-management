@@ -1,18 +1,21 @@
 FROM jenkins/jenkins:lts
 
 USER root
-RUN apt-get update -y
-RUN curl https://get.docker.com/ > dockerinstall \
-    && chmod 777 dockerinstall \
-    && ./dockerinstall
 
-RUN usermod -aG docker jenkins
+# Install Docker
+RUN apt-get update && \
+    apt-get install -y curl apt-transport-https ca-certificates gnupg lsb-release && \
+    curl -fsSL https://get.docker.com -o get-docker.sh && \
+    sh get-docker.sh && \
+    usermod -aG docker jenkins
 
-RUN apt-get update -y \
-    && apt-get install python3 -y \
-    && apt-get install python3-pip -y \
-    && apt install python3.11-venv -y \
-    && rm -rf /usr/lib/python3.11/rm EXTERNALLY-MANAGED
+# Install Python 3 and pip
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip python3.11-venv
 
+# Install kubectl
+RUN curl -LO "https://dl.k8s.io/release/v1.29.0/bin/linux/amd64/kubectl" && \
+    chmod +x kubectl && \
+    mv kubectl /usr/local/bin/kubectl
 
 USER jenkins
