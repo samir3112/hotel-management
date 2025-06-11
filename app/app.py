@@ -10,11 +10,12 @@ app.secret_key = os.urandom(24)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'default_secret')
 
 # MySQL configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'root'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_DB'] = 'hotel_db'
+app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST', 'localhost')
+app.config['MYSQL_USER'] = os.getenv('MYSQL_USER', 'root')
+app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD', 'root')
+app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT', 3306))
+app.config['MYSQL_DB'] = os.getenv('MYSQL_DB', 'hotel_db')
+
 
 mysql = MySQL(app)
 
@@ -306,4 +307,4 @@ def contact():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=5000)
