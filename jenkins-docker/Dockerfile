@@ -23,7 +23,7 @@ USER jenkins
 
 # docker build -t custom-jenkins .
 # docker volume create jenkins_data
-#  docker run -d --name jenkins \
+#  docker run -d --name jenkins-new \
 #   -p 8080:8080 -p 50000:50000 \
 #   -v jenkins_data:/var/jenkins_home \
 #   -v /var/run/docker.sock:/var/run/docker.sock \
