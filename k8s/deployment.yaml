@@ -18,14 +18,16 @@ spec:
         ports:
         - containerPort: 5000
         env:
-        - name: DB_HOST
-          value: mysql-service
-        - name: DB_USER
-          value: root
-        - name: DB_PASSWORD
-          value: password
-        - name: DB_NAME
-          value: hotel_db
+            - name: MYSQL_HOST
+              value: mysql-service   # 👈 service name of MySQL in K8s
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PASSWORD
+              value: root
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_DB
+              value: hotel_db
 
         # ✅ Readiness probe added here
         readinessProbe:
