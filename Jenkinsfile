@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'samir3112/hotel-management:latest'
+        KUBECONFIG = '/var/jenkins_home/.kube/config' 
     }
 
     stages {
