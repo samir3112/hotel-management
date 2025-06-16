@@ -13,15 +13,18 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install -y python3 python3-pip python3.11-venv
 
-# Install kubectl
-RUN curl -LO "https://dl.k8s.io/release/v1.29.0/bin/linux/amd64/kubectl" && \
-    chmod +x kubectl && \
-    mv kubectl /usr/local/bin/kubectl
+# Install kubectl (v1.30)
+RUN curl -LO "https://dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl" && \
+    chmod +x kubectl && mv kubectl /usr/local/bin/kubectl
+
+# Allow Jenkins user to use kubectl and docker
+RUN chown -R jenkins:jenkins /usr/local/bin/kubectl
 
 USER jenkins
 
 
-# docker build -t custom-jenkins .
+
+# docker build -t custom-jenkins-k8s .
 # docker volume create jenkins_data
 #  docker run -d --name jenkins \
 #  -p 8080:8080 -p 50000:50000 \
@@ -32,4 +35,7 @@ USER jenkins
 
 # docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 # Login to jenins via port forwarding (localhost:8080)
-# 
+# mkdir -p ~/.kube   --> Onces
+# nano ~/.kube/config --> Onces
+# kubectl get nodes --> check everytime in docker
+# chmod +x scripts/deploy.sh --> to execute deploy.sh
