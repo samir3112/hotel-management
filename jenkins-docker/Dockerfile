@@ -23,8 +23,13 @@ USER jenkins
 
 # docker build -t custom-jenkins .
 # docker volume create jenkins_data
-#  docker run -d --name jenkins-new \
-#   -p 8080:8080 -p 50000:50000 \
-#   -v jenkins_data:/var/jenkins_home \
-#   -v /var/run/docker.sock:/var/run/docker.sock \
-#   custom-jenkins
+#  docker run -d --name jenkins \
+#  -p 8080:8080 -p 50000:50000 \
+#  -v /var/run/docker.sock:/var/run/docker.sock \
+#  -v jenkins_home:/var/jenkins_home \
+#  --group-add $(getent group docker | cut -d: -f3) \
+#  samir3112/jenkins-custom:v1
+
+# docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+# Login to jenins via port forwarding (localhost:8080)
+# 
