@@ -24,7 +24,7 @@ USER jenkins
 
 
 
-# docker build -t custom-jenkins-k8s .
+# docker build -t jenkins-custom-k8s .
 # docker volume create jenkins_data
 #  docker run -d --name jenkins \
 #  -p 8080:8080 -p 50000:50000 \
@@ -39,3 +39,4 @@ USER jenkins
 # nano ~/.kube/config --> Onces
 # kubectl get nodes --> check everytime in docker
 # chmod +x scripts/deploy.sh --> to execute deploy.sh
+# kubectl create configmap mysql-init --from-file=init.sql
