@@ -40,3 +40,5 @@ USER jenkins
 # kubectl get nodes --> check everytime in docker
 # chmod +x scripts/deploy.sh --> to execute deploy.sh
 # kubectl create configmap mysql-init --from-file=init.sql
+# kubectl get pods
+# kubectl get svc
