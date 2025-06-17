@@ -39,3 +39,4 @@ USER jenkins
 # nano ~/.kube/config --> Onces
 # kubectl get nodes --> check everytime in docker
 # chmod +x scripts/deploy.sh --> to execute deploy.sh
+# kubectl create configmap mysql-initdb --from-file=init.sql
